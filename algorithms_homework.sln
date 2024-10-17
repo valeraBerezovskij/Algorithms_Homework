@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "algorithms_homework", "algo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Queue", "Queue\Queue.vcxproj", "{FA45054A-C611-4EA1-B496-4AD97A3E7D46}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "List", "List\List.vcxproj", "{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{FA45054A-C611-4EA1-B496-4AD97A3E7D46}.Release|x64.Build.0 = Release|x64
 		{FA45054A-C611-4EA1-B496-4AD97A3E7D46}.Release|x86.ActiveCfg = Release|Win32
 		{FA45054A-C611-4EA1-B496-4AD97A3E7D46}.Release|x86.Build.0 = Release|Win32
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Debug|x64.ActiveCfg = Debug|x64
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Debug|x64.Build.0 = Debug|x64
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Debug|x86.Build.0 = Debug|Win32
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Release|x64.ActiveCfg = Release|x64
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Release|x64.Build.0 = Release|x64
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Release|x86.ActiveCfg = Release|Win32
+		{7A88AB11-16F4-43D9-B162-6CBF1BECFD0C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

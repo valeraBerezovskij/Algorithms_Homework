@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 
 class Node {
 public:
@@ -11,17 +12,14 @@ public:
 class ForwardList
 {
 public:
-	ForwardList() : head(nullptr) {}
-
-	void push_back(int value) {
-		Node* cur = head;
-		while (cur != nullptr) {
-			if (cur->next == nullptr) {
-				cur->next = new Node(value);
-			}
-		}
-	}
+	ForwardList() : head(nullptr), tale(nullptr) {}
+	~ForwardList();
+	void push_back(int value);
+	void push_front(int value);
+	void insert(int value, size_t index);
+	void print();
 private:
 	Node* head;
+	Node* tale;
 };
 

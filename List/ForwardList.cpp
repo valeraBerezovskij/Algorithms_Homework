@@ -52,3 +52,21 @@ void ForwardList::print()
 		cur = cur->next;
 	}
 }
+
+ForwardList& ForwardList::operator=(const ForwardList& other)
+{
+	if (this != &other) {
+		head = new Node(*other.head);
+	}
+	return *this;
+}
+
+ForwardList::ForwardList(const ForwardList& other) {
+	head = new Node(*other.head); //Тут у нас вызвался копирующий конструктор для Node
+}
+
+Node::Node(const Node& other) : value(other.value), next(nullptr) {
+	if (other.next != nullptr) {
+		next = new Node(*other.next); // А тут они все скопировались
+	}
+}

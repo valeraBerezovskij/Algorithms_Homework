@@ -46,6 +46,7 @@ void List::clear() {
         else        { head = nullptr; }
         delete temp;    
     }
+    size = 0;
 }
 
 void List::show() const

@@ -6,6 +6,14 @@ List::List()
     :head(nullptr), tail(nullptr), size(0)
 {}
 
+List::List(const List& other) : head(nullptr), tail(nullptr), size(0) {
+    Node* cur = other.head;
+    while (cur) {
+        push_back(cur->value);
+        cur = cur->next;
+    }
+}
+
 void List::push_back(int value) {
     if (head && tail) {
         Node* new_node = new Node(tail, value);
@@ -37,15 +45,11 @@ void List::push_front(int value) {
 
 void List::clear() {
     while (head) {
-        if (!tail) {
-            return;
-        }
-        Node* temp = tail;
-        tail = tail->prev;
-        if   (tail) { tail->next = nullptr; }
-        else        { head = nullptr; }
-        delete temp;    
+        Node* temp = head;
+        head = head->next;
+        delete temp;
     }
+    tail = nullptr;
     size = 0;
 }
 

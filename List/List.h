@@ -20,6 +20,7 @@ private:
     size_t size;
 public:
     List();
+    List(const List& other);
     void push_back(int value);
     void push_front(int value);
     void clear();

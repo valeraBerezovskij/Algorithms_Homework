@@ -14,5 +14,7 @@ int main()
 	k.push_back(6);
 	std::cout << "\n";
 	k.show();
+	k.insert(0, 7);
+	k.show();
 
 }

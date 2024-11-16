@@ -8,13 +8,21 @@ int main()
 	l.push_back(2);
 	l.push_back(3);
 	l.show();
-	List k(l);
-	k.push_back(4);
-	k.push_back(5);
-	k.push_back(6);
+	l.reverse();
 	std::cout << "\n";
-	k.show();
-	k.insert(0, 7);
-	k.show();
+	l.pop_back();
+	l.show();
+	//List k;
+	//k.push_back(4);
+	//k.push_back(5);
+	//k.push_back(6);
+
+	//std::cout << "\n";
+
+	//k.show();
+	//
+	//l = k;
+	//
+	//l.show();
 
 }

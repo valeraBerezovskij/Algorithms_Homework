@@ -14,18 +14,87 @@ List::List(const List& other) : head(nullptr), tail(nullptr), size(0) {
 	}
 }
 
-List* List::clone() {
-	Node* new_head = new Node(head->prev, head->value);
-	Node* current = head;
-	Node* new_current = new_head;
+List& List::operator=(const List& other) {
+	if (this != &other) {
+		if(this != nullptr){ clear(); }
 
-	for (size_t i = 0; i < size; ++i)
-	{
-		new_current->next = current->next;
-		
+		Node* current = other.head;
+		for (size_t i = 0; i < other.size; ++i) {
+			push_back(current->value);
+			current = current->next;
+		}
 	}
+	return *this;
 }
 
+void List::reverse() {
+	Node* ptr1 = head;
+	Node* ptr2 = ptr1->next;
+
+	ptr1->next = nullptr;
+	ptr1->prev = ptr2;
+
+	while (ptr2 != nullptr) {
+		ptr2->prev = ptr2->next;
+		ptr2->next = ptr1;
+		ptr1 = ptr2;
+		ptr2 = ptr2->prev;
+	}
+	std::swap(head, tail);
+}
+
+void List::pop_back()
+{
+	if (tail == nullptr) {
+		return;
+	}
+	if (tail == head) {
+		head = nullptr;
+	}
+	Node* temp = tail;
+	tail = tail->prev;
+	if (tail != nullptr) {
+		tail->next = nullptr;
+	}
+	else {
+		head = nullptr;	
+	}
+	delete temp;
+	size--;
+}
+
+void List::pop_front()
+{
+	if (head == nullptr) {
+		return;
+	}
+
+	if (tail == head) {
+		head = nullptr;
+	}
+	Node* temp = head;
+	head = head->next;
+	if (head != nullptr) {
+		head->prev = nullptr;
+	}
+	else {
+		head = nullptr;
+	}
+	delete temp;
+	size--;
+}
+
+//List* List::clone() {
+//	Node* new_head = new Node(head->prev, head->value);
+//	Node* current = head;
+//	Node* new_current = new_head;
+//
+//	for (size_t i = 0; i < size; ++i)
+//	{
+//		new_current->next = current->next;
+//			
+//	}
+//}
 
 void List::push_back(int value) {
 	if (head && tail) {

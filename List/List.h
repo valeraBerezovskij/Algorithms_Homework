@@ -5,9 +5,10 @@ class List
 private:
 	class Node {
 	public:
-		int value;
-		Node* prev;
-		Node* next;
+		int       value;
+		Node*     prev;
+		Node*     next;
+
 		Node() :value(0	), prev(nullptr), next(nullptr)
 		{}
 		Node(int value) :value(value), prev(nullptr), next(nullptr)
@@ -15,13 +16,17 @@ private:
 		Node(Node* prev, int value) :value(value), prev(prev), next(nullptr)
 		{}
 	};
-	Node* head;
-	Node* tail;
-	size_t size;
+	Node*       head;
+	Node*       tail;
+	size_t      size;
 public:
 	List();
 	List(const List& other);
-	List* clone();
+	List& operator=(const List& other);
+	void reverse();
+	void pop_back();
+	void pop_front();
+	//List* clone();
 	void push_back(int value);
 	void push_front(int value);
 	int back() const { return tail->value; }

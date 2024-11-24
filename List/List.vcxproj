@@ -129,13 +129,13 @@
   <ItemGroup>
     <ClCompile Include="ForwardList.cpp" />
     <ClCompile Include="LIFOList.cpp" />
-    <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForwardList.h" />
     <ClInclude Include="LIFOList.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="List_impl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

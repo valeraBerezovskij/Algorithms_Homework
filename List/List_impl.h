@@ -2,11 +2,13 @@
 #include <iostream>
 using namespace std;
 
-List::List()
-	:head(nullptr), tail(nullptr), size(0)
+template<class T>
+List<T>::List()
+	: head(nullptr), tail(nullptr), size(0)
 {}
 
-List::List(const List& other) : head(nullptr), tail(nullptr), size(0) {
+template<class T>
+List<T>::List(const List<T>& other) : head(nullptr), tail(nullptr), size(0) {
 	Node* cur = other.head;
 	while (cur) {
 		push_back(cur->value);
@@ -14,9 +16,10 @@ List::List(const List& other) : head(nullptr), tail(nullptr), size(0) {
 	}
 }
 
-List& List::operator=(const List& other) {
+template<class T>
+List<T>& List<T>::operator=(const List<T>& other) {
 	if (this != &other) {
-		if(this != nullptr){ clear(); }
+		if (this != nullptr) { clear(); }
 
 		Node* current = other.head;
 		for (size_t i = 0; i < other.size; ++i) {
@@ -27,7 +30,8 @@ List& List::operator=(const List& other) {
 	return *this;
 }
 
-void List::reverse() {
+template<class T>
+void List<T>::reverse() {
 	Node* ptr1 = head;
 	Node* ptr2 = ptr1->next;
 
@@ -43,7 +47,8 @@ void List::reverse() {
 	std::swap(head, tail);
 }
 
-void List::pop_back()
+template<class T>
+void List<T>::pop_back()
 {
 	if (tail == nullptr) {
 		return;
@@ -57,14 +62,14 @@ void List::pop_back()
 		tail->next = nullptr;
 	}
 	else {
-		head = nullptr;	
+		head = nullptr;
 	}
 	delete temp;
 	size--;
 }
 
-void List::pop_front()
-{
+template<class T>
+void List<T>::pop_front() {
 	if (head == nullptr) {
 		return;
 	}
@@ -84,19 +89,8 @@ void List::pop_front()
 	size--;
 }
 
-//List* List::clone() {
-//	Node* new_head = new Node(head->prev, head->value);
-//	Node* current = head;
-//	Node* new_current = new_head;
-//
-//	for (size_t i = 0; i < size; ++i)
-//	{
-//		new_current->next = current->next;
-//			
-//	}
-//}
-
-void List::push_back(int value) {
+template<class T>
+void List<T>::push_back(T& value) {
 	if (head && tail) {
 		Node* new_node = new Node(tail, value);
 		tail->next = new_node;
@@ -110,7 +104,8 @@ void List::push_back(int value) {
 	size++;
 }
 
-void List::push_front(int value) {
+template<class T>
+void List<T>::push_front(T& value) {
 	if (head && tail) {
 		Node* new_node = new Node(value);
 		new_node->next = head;
@@ -125,7 +120,8 @@ void List::push_front(int value) {
 	size++;
 }
 
-void List::clear() {
+template<class T>
+void List<T>::clear() {
 	while (head) {
 		Node* temp = head;
 		head = head->next;
@@ -135,10 +131,11 @@ void List::clear() {
 	size = 0;
 }
 
-bool List::insert(int index, int value)
+template<class T>
+bool List<T>::insert(int index, T& value)
 {
 	if (index < 0 || index > size - 1) {
-		return false;	
+		return false;
 	}
 
 	Node* current = head;
@@ -167,11 +164,12 @@ bool List::insert(int index, int value)
 	return true;
 }
 
-int List::replace(int key, int value)
+template<class T>
+int List<T>::replace(int key, T& value)
 {
 	Node* current = head;
 	int counter = 0;
-	while (current)	{
+	while (current) {
 		if (current->value == key) {
 			current->value = value;
 			counter++;
@@ -181,7 +179,8 @@ int List::replace(int key, int value)
 	return counter;
 }
 
-void List::show() const
+template<class T>
+void List<T>::show() const
 {
 	Node* current = head;
 	while (current)
@@ -192,7 +191,8 @@ void List::show() const
 	cout << endl;
 }
 
-int List::operator[](int index)
+template<class T>
+T& List<T>::operator[](int index)
 {
 	Node* current = head;
 	for (int i = 0; i < index; i++) {
@@ -201,6 +201,54 @@ int List::operator[](int index)
 	return current->value;
 }
 
-List::~List() {
+template<class T>
+List<T>& List<T>::operator+(const List<T>& other)
+{
+	List<T>* newList = new List<T>();
+
+	//Добавить элементы с одного списка
+	Node* current = head;
+	for (size_t i = 0; i < size; ++i) {
+		newList->push_back(current->value);
+		current = current->next;
+	}
+	//Добавить элементы со второго списка
+	current = other.head;
+	for (size_t i = 0; i < other.size; ++i) {
+		newList->push_back(current->value);
+		current = current->next;
+	}
+	//вернуть список
+	return *newList;
+}
+
+template<class T>
+inline List<T>& List<T>::operator*(const List<T>& other)
+{
+	List<T>* newList = new List<T>();
+	Node* currentThis = head;
+
+	//Пройтись по первому списку
+	for (size_t i = 0; i < size; ++i)
+	{
+		//Пройтись по второму
+		Node* currentOther = other.head;
+		for (size_t j = 0; j < other.size; ++j)
+		{
+			//Проверить на наличие
+			if (currentThis->value == currentOther->value) {
+				//Добавить
+				newList->push_back(currentThis->value);
+			}
+			currentOther = currentOther->next;
+		}
+		currentThis = currentThis->next;
+	}
+	//Вернуть список
+	return *newList;
+}
+
+template<class T>
+List<T>::~List() {
 	clear();
 }

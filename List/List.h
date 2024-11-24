@@ -1,11 +1,12 @@
 #pragma once
 
+template<class T>
 class List
 {
 private:
 	class Node {
 	public:
-		int       value;
+		T       value;
 		Node*     prev;
 		Node*     next;
 
@@ -26,15 +27,18 @@ public:
 	void reverse();
 	void pop_back();
 	void pop_front();
-	//List* clone();
-	void push_back(int value);
-	void push_front(int value);
-	int back() const { return tail->value; }
-	int front() const { return head->value; }
+	void push_back(T& value);
+	void push_front(T& value);
+	T& back() const { return tail->value; }
+	T& front() const { return head->value; }
 	void clear();
-	bool insert(int index, int value);
-	int replace(int key, int value);
+	bool insert(int index, T& value);
+	int replace(int key, T& value);
 	void show() const;
-	int operator[](int index);
+	T& operator[](int index);
+	List<T>& operator+(const List<T>& other);
+	List<T>& operator*(const List<T>& other);
 	~List();
 };
+
+#include"List_impl.h"

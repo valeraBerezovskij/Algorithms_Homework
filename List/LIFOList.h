@@ -20,83 +20,122 @@ template<class T>
 class LIFOList {
 public:
 	LIFOList() : head(nullptr), tail(nullptr) {}
-	LIFOList(const LIFOList& other) 
-		: head(nullptr), tail(nullptr), size(0) 
-	{
-		if (other.head) {
-			head = new Node<T>(*other.head);
-			Node<T>* current = head;
-			Node<T>* Òurrent2 = other.head->next;
-			while (Òurrent2) {
-				current->next = new Node<T>(*Òurrent2);
-				current = current->next;
-				Òurrent2 = Òurrent2->next;
-			}
-			tail = current;
-			size = other.size;
-		}
-	}
-	~LIFOList() {
-		Node<T>* cur = head;
-		while (cur != nullptr) {
-			Node<T>* next_node = cur->next;
-			delete cur;
-			cur = next_node;
-		}
-		head = nullptr;
-		tail = nullptr;
-		size = 0;
-	}
-
-	void push(T value) {
-		Node<T>* new_node = new Node<T>(value);
-		if (!head) {
-			head = new_node;
-			tail = new_node;
-		}
-		else {
-			tail->next = new_node;
-			tail = new_node;
-		}
-		++size;
-	}
-
-	void pop() {
-		if (!head) { return; }
-
-		if (tail == head) {
-			delete head;
-			head = nullptr;
-			tail = nullptr;
-		}
-		else {
-			Node<T>* current = head;
-			while (current->next != tail) {
-				current = current->next;
-			}
-			delete tail;
-			tail = current;
-			tail->next = nullptr;
-		}
-		size--;
-	}
-	void print() {
-		Node<T>* cur = head;
-		while (cur != nullptr) {
-			std::cout << cur->value << ' ';
-			cur = cur->next;
-		}
-	}
-	LIFOList& operator=(const LIFOList& other) {
-		if (this != &other) {
-			this->size = other.size;
-			head = new Node(*other.head);
-		}
-		return *this;
-	}
+	LIFOList(const LIFOList& other);
+	~LIFOList();
+	void push(T value);
+	void pop();
+	void print();
+	LIFOList& operator=(const LIFOList& other);
 
 private:
 	Node<T>* head;
 	Node<T>* tail;
 	size_t size;
 };
+
+template<class T>
+inline LIFOList<T>::LIFOList(const LIFOList& other)
+	: head(nullptr), tail(nullptr), size(0)
+{
+	if (other.head) {
+		head = new Node<T>(*other.head);
+		Node<T>* current = head;
+		Node<T>* current2 = other.head->next;
+		while (current2) {
+			current->next = new Node<T>(*Òurrent2);
+			current = current->next;
+			current2 = current2->next;
+		}
+		tail = current;
+		size = other.size;
+	}
+}
+
+template<class T>
+inline LIFOList<T>::~LIFOList() {
+	Node<T>* cur = head;
+	while (cur != nullptr) {
+		Node<T>* next_node = cur->next;
+		delete cur;
+		cur = next_node;
+	}
+	head = nullptr;
+	tail = nullptr;
+	size = 0;
+}
+
+template<class T>
+inline void LIFOList<T>::push(T value) {
+	Node<T>* new_node = new Node<T>(value);
+	if (!head) {
+		head = new_node;
+		tail = new_node;
+	}
+	else {
+		new_node->next = head;
+		head = new_node;
+	}
+	++size;
+}
+
+template<class T>
+inline void LIFOList<T>::pop() {
+	if (!head) { return; }
+
+	if (tail == head) {
+		delete head;
+		head = nullptr;
+		tail = nullptr;
+	}
+	else {
+		Node<T>* current = head;
+		while (current->next != tail) {
+			current = current->next;
+		}
+		delete tail;
+		tail = current;
+		tail->next = nullptr;
+	}
+	size--;
+}
+
+template<class T>
+inline void LIFOList<T>::print() {
+	Node<T>* cur = head;
+	while (cur != nullptr) {
+		std::cout << cur->value << ' ';
+		cur = cur->next;
+	}
+}
+
+template<class T>
+inline LIFOList<T>& LIFOList<T>::operator=(const LIFOList& other) {
+	if (this != &other) {
+		//”‰‡ÎËÚ¸
+		Node<T>* cur = head;
+		while (cur != nullptr) {
+			Node<T>* next_node = cur->next;
+			delete cur;
+			cur = next_node;
+		}
+		//«‡ÌÛÎËÚ¸
+		head = nullptr;
+		tail = nullptr;
+		size = 0;
+
+		//  ÓÔËÓ‚‡Ú¸
+		if (other.head) {
+			head = new Node<T>(*other.head);
+			Node<T>* current = head;
+			Node<T>* current2 = other.head->next;
+			while (current2) {
+				current->next = new Node<T>(*current2);
+				current = current->next;
+				current2 = current2->next;
+			}
+			tail = current;
+			size = other.size;
+		}
+	}
+	return *this;
+}

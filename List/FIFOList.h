@@ -72,6 +72,7 @@ inline void FIFOList<T>::push(T value) {
         tail = new_node;
     }
     else {
+        //добавляем в конец
         tail->next = new_node;
         tail = new_node;
     }

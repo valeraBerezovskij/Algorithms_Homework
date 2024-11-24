@@ -72,6 +72,7 @@ inline void LIFOList<T>::push(T value) {
 		tail = new_node;
 	}
 	else {
+		//добавляем в начало
 		new_node->next = head;
 		head = new_node;
 	}

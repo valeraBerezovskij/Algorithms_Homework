@@ -1,11 +1,15 @@
 #include "Tree.h"
 
-void Tree::print(Node* node = nullptr) {
+void Tree::print(Node* node) {
+	std::cout << "print start\n";
 	//Сделать проверки
 	if (node == nullptr) {
 		node = _root;
 	}
-	if (!node) return;
+	if (!node) {
+		std::cout << "print end\n";
+		return;
+	}
 	std::cout << node->value << " ";
 	//Обойти рекурсивно левую часть
 	print(node->left);

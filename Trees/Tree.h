@@ -6,9 +6,9 @@ class Tree
 private:
 	class Node {
 	public:
-		int value;
-		Node* right;
-		Node* left;
+		int      value;
+		Node*    right;
+		Node*    left;
 		Node(int value) 
 			: Node(value, nullptr, nullptr) {}
 		Node(int value, Node* right, Node* left)
@@ -16,11 +16,16 @@ private:
 	};
 	
 private:
-	Node* _root;
+	Node*      _root;
+	void insert(int value, Node*& node);
+	void print (Node* node) const;
+	bool find  (Node* node, int value) const;
+	void erase (Node* node, int value);
 public:
 	Tree() : _root(nullptr) {}
-	void print(Node* node = nullptr);
+	void print ();
 	void insert(int value);
-	void insert(int value, Node* node);
+	bool find  (int value) const;
+	void erase (int value);
 };
 

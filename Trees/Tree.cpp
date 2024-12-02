@@ -1,39 +1,74 @@
 #include "Tree.h"
 
-void Tree::print(Node* node) {
-	std::cout << "print start\n";
-	//Сделать проверки
-	if (node == nullptr) {
-		node = _root;
-	}
+
+void Tree::print(Node* node) const {
 	if (!node) {
-		std::cout << "print end\n";
 		return;
 	}
-	std::cout << node->value << " ";
-	//Обойти рекурсивно левую часть
 	print(node->left);
-	//Обойти рекурсивно правую часть
+	std::cout << node->value << " ";
 	print(node->right);
 }
 
-//незакоченный метод insert
-void Tree::insert(int value)
-{
-	insert(value, _root);
+
+
+void Tree::print() {
+	print(_root);
 }
 
-void Tree::insert(int value, Node* node)
+void Tree::insert(int value) {
+	if (_root == nullptr)
+		_root = new Node(value);
+	else 
+		insert(value, _root);
+}
+
+bool Tree::find(Node* node, int value) const{
+	if (!node)                { return false; }
+	if (node->value == value) { return true;  }
+
+	if (value > node->value) {
+		find(node->right, value);
+	}
+	else if (value < node->value) {
+		find(node->left, value);
+	}
+
+	return false;
+}
+
+bool Tree::find(int value) const {
+	return find(_root, value);
+}
+
+void Tree::erase(Node* node, int value)
 {
-	if (node == nullptr) {
-		Node* newNode = new Node(value);
-		node = newNode;
+	if (!node) { return; }
+
+	if (value > node->value) {
+		find(node->right, value);
+	}
+	else if (value < node->value) {
+		find(node->left, value);
+	}
+	else {
+
+	}
+}
+void Tree::erase(int value) {
+	if (!_root) { return; }
+	erase(_root, value);
+}
+
+void Tree::insert(int value, Node*& node) {
+	if (!node) { 
+		node = new Node(value);
 		return;
 	}
 	if (value > node->value) {
 		insert(value, node->right);
 	}
-	else {
+	else if(value < node->value) {
 		insert(value, node->left);
 	}
 }
